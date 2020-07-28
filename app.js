@@ -38,32 +38,52 @@ function promptQuestions (){
             message: "What is the employee's email address?",
             name: "email",
         },
-        {
-            type: "confirm",
-            message: "Do you want to add a new employee?",
-            name: "addNew",
-        },
-        // for managers
+        // if user chooses manager, ask these questions
         {
             type: "input",
             message: "What is the manager's office number?",
             name: "officeNumber",
         },
-        // for engineers
+        // if user chooses engineer, ask these questions
         {
             type: "input",
             message: "What is the engineer's github username?",
             name: "github",
         },
-        // for interns
+        // if user chooses intern, ask these questions
         {
             type: "input",
             message: "Which college or university did the intern attend?",
             name: "school",
         },
-
+        // when they've answered all questions, ask this one to prompt again from the top if more employees need to be added
+        {
+            type: "confirm",
+            message: "Do you want to add a new employee?",
+            name: "addNew",
+        },
     ];
 };
+
+
+function manger(answers){
+    //ask office num
+    //done?
+    //push instance of class into an array (teammembers)
+    //if done
+    //var employee = new manger(answers.name, answers.id, answers.email, mangerinfo.officenum)
+    //render fx 
+    //fs write write file
+    //else ask the starter q's
+}
+
+function intern(){
+
+}
+
+function engineer(){
+
+}
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 
