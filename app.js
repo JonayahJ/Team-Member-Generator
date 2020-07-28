@@ -8,7 +8,12 @@ const fs = require("fs");
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
+const writeFileAsync = util.promisify(fs.writefile);
 const render = require("./lib/htmlRenderer");
+const Employee = require("./lib/Employee");
+
+// util - allows you to use write file, asynchronously. 
+const util = require("util")
 
 const teamMembers = [];
 
@@ -16,74 +21,156 @@ const teamMembers = [];
 // array of questions for user
     // add function to select certain questions for the user to answer
 function promptQuestions (){
-    const questions = [
-        {
-            type: "list",
-            message: "Which type of employee would you like to add?",
-            name: "role",
-            choices: ["Manager", "Engineer", "Intern"]
-        },
-        {
-            type: "input",
-            message: "What is the new employee's name?",
-            name: "name",
-        },
-        {
-            type: "input",
-            message: "What is the new employee's ID number",
-            name: "id",
-        },
-        {
-            type: "input",
-            message: "What is the employee's email address?",
-            name: "email",
-        },
-        // if user chooses manager, ask these questions
-        {
-            type: "input",
-            message: "What is the manager's office number?",
-            name: "officeNumber",
-        },
-        // if user chooses engineer, ask these questions
-        {
-            type: "input",
-            message: "What is the engineer's github username?",
-            name: "github",
-        },
-        // if user chooses intern, ask these questions
-        {
-            type: "input",
-            message: "Which college or university did the intern attend?",
-            name: "school",
-        },
-        // when they've answered all questions, ask this one to prompt again from the top if more employees need to be added
-        {
-            type: "confirm",
-            message: "Do you want to add a new employee?",
-            name: "addNew",
-        },
-    ];
+    inquirer.prompt(
+        [
+            {
+                type: "list",
+                message: "Which type of employee would you like to add?",
+                name: "role",
+                choices: ["Manager", "Engineer", "Intern"]
+            },
+            {
+                type: "input",
+                message: "What is the new employee's name?",
+                name: "name",
+            },
+            {
+                type: "input",
+                message: "What is the new employee's ID number",
+                name: "id",
+            },
+            {
+                type: "input",
+                message: "What is the employee's email address?",
+                name: "email",
+            },
+        ]
+     ).then(function(response){
+         if(response.role == "Manager"){
+             manager(response);
+         }
+         if(response.role == "Intern"){
+            intern(response);
+        }
+        if(response.role == "Engineer"){
+            engineer(response);
+        }
+    })
 };
 
 
-function manger(answers){
+function manager(answers){
+    console.log(answers);
+    console.log("inside manager!");
     //ask office num
-    //done?
-    //push instance of class into an array (teammembers)
-    //if done
-    //var employee = new manger(answers.name, answers.id, answers.email, mangerinfo.officenum)
-    //render fx 
-    //fs write write file
-    //else ask the starter q's
+    inquirer.prompt(
+        [
+            {
+                type: "input",
+                message: "What is the manager's office number?",
+                name: "officeNumber",
+            },
+            {
+                type: "confirm",
+                message: "Do you want to add a new employee?",
+                name: "addNew",
+            },
+        ]
+     )
+     .then(function(managerInfo){
+         
+        const mgr = new Manager(answers.name, answers.id, answers.email, managerInfo.officeNumber)
+        //done?
+        //push instance of class into an array (teammembers)
+        teamMembers.push(mgr);
+        console.log(teamMembers);
+
+        if (answers.confirm){//this needs to be fixed to call the yes no variable should return true or false
+            //ask the starter q's
+            promptQuestions();
+        }else{
+            //done
+            render();
+            //fs write write file
+        }
+    })
 }
 
-function intern(){
+function intern(answers){
+    console.log(answers);
+    console.log("inside intern!");
+    //ask office num
+    inquirer.prompt(
+        [
+            {
+                type: "input",
+                message: "Which college or university did the intern attend?",
+                name: "school",
+            },
+            {
+                type: "confirm",
+                message: "Do you want to add a new employee?",
+                name: "addNew",
+            },        
+        ]
+    )
+     .then(function(internInfo){
+         
+        const int = new Intern(answers.name, answers.id, answers.email, internInfo.school)
+        //done?
+        //push instance of class into an array (teammembers)
+        teamMembers.push(int);
+        console.log(teamMembers);
 
+        if (answers.confirm){//this needs to be fixed to call the yes no variable should return true or false
+            //ask the starter q's
+            promptQuestions();
+        }else{
+            //done
+            render();
+            //fs write write file    
+        }
+    })
 }
 
-function engineer(){
+function engineer(answers){
+    console.log(answers);
+    console.log("inside engineer!");
+    //ask office num
+    inquirer.prompt(
+        [
+            {
+                type: "input",
+                message: "What is the engineer's github username?",
+                name: "github",
+            },
+            {
+                type: "confirm",
+                message: "Do you want to add a new employee?",
+                name: "addNew",
+            },
+        ]
+    )
+     .then(function(engineerInfo){
+         
+        const eng = new Engineer(answers.name, answers.id, answers.email, engineerInfo.github)
+        //done?
+        //push instance of class into an array (teammembers)
+        teamMembers.push(eng);
+        console.log(teamMembers);
 
+        if (answers.confirm){//this needs to be fixed to call the yes no variable should return true or false
+            //ask the starter q's
+            promptQuestions();
+        }else{
+            //done
+            render();
+            //fs write write file
+        }
+    })
 }
+
+promptQuestions();
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 
