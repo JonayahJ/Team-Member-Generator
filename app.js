@@ -14,6 +14,51 @@ const render = require("./lib/htmlRenderer");
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 
+// array of questions for user
+// add function to select certain questions for the user to answer
+const questions = [
+    {
+        type: "list",
+        message: "Which type of team member would you like to add?",
+        name: "role",
+        choices: ["Manager", "Engineer", "Intern"]
+    },
+    {
+        type: "input",
+        message: "What is the new team members's name?",
+        name: "name",
+    },
+    {
+        type: "input",
+        message: "What is the new team members's ID number",
+        name: "id",
+    },
+    {
+        type: "input",
+        message: "What is the team member's email address?",
+        name: "email",
+    },
+    // for managers
+    {
+        type: "input",
+        message: "What is the manager's office number?",
+        name: "office",
+    },
+    // for engineers
+    {
+        type: "input",
+        message: "What is the engineer's github username?",
+        name: "username",
+    },
+    // for interns
+    {
+        type: "input",
+        message: "Which college or university did the intern attend?",
+        name: "uni",
+    },
+
+];
+
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
@@ -29,7 +74,7 @@ const render = require("./lib/htmlRenderer");
 // employee type.
 
 // HINT: make sure to build out your classes first! Remember that your Manager, Engineer,
-// and Intern classes should all extend from a class named Employee; see the directions
+// and Intern classes should all EXTEND from a CLASS named Employee; see the directions
 // for further information. Be sure to test out each class and verify it generates an
 // object with the correct structure and methods. This structure will be crucial in order
 // for the provided `render` function to work! ```
