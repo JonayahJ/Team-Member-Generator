@@ -13,51 +13,6 @@ const render = require("./lib/htmlRenderer");
 const teamMembers = [];
 
 
-// CLASSES
-class Employee {
-    constructor(name, id, email){
-        this.name = name;
-        this.id = id;
-        this.email = email;
-    }
-    getName(){}
-    getId(){}
-    getEmail(){}
-    getRole(){
-        return Employee;
-    }
-}
-    // extend Employee class 3x
-class Manager extends Employee {
-    constructor(officeNumber){
-        this.officeNumber = officeNumber;
-    }
-    // getRole(){
-    //     return Employee;
-    // }
-}
-class Engineer extends Employee {
-    constructor(github){
-        this.github = github;
-    }
-    getGitHub(){}    
-    // getRole(){
-    //     return Employee;
-    // }
-}
-class Intern extends Employee {
-    constructor(school){
-        this.school = school;
-    }
-    getSchool(){}    
-    // getRole(){
-    //     return Employee;
-    // }
-}
-
-// const employee1 = new Employee("Jo", 3, "jonayah@thinkhalcyon.com")
-// console.log(employee1)
-
 // array of questions for user
     // add function to select certain questions for the user to answer
 function promptQuestions (){
