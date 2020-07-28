@@ -10,54 +10,110 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
+const teamMembers = [];
 
+
+// CLASSES
+class Employee {
+    constructor(name, id, email){
+        this.name = name;
+        this.id = id;
+        this.email = email;
+    }
+    getName(){}
+    getId(){}
+    getEmail(){}
+    getRole(){
+        return Employee;
+    }
+}
+    // extend Employee class 3x
+class Manager extends Employee {
+    constructor(officeNumber){
+        this.officeNumber = officeNumber;
+    }
+    // getRole(){
+    //     return Employee;
+    // }
+}
+class Engineer extends Employee {
+    constructor(github){
+        this.github = github;
+    }
+    getGitHub(){}    
+    // getRole(){
+    //     return Employee;
+    // }
+}
+class Intern extends Employee {
+    constructor(school){
+        this.school = school;
+    }
+    getSchool(){}    
+    // getRole(){
+    //     return Employee;
+    // }
+}
+
+// const employee1 = new Employee("Jo", 3, "jonayah@thinkhalcyon.com")
+// console.log(employee1)
+
+// array of questions for user
+    // add function to select certain questions for the user to answer
+function promptQuestions (){
+    const questions = [
+        {
+            type: "list",
+            message: "Which type of employee would you like to add?",
+            name: "role",
+            choices: ["Manager", "Engineer", "Intern"]
+        },
+        {
+            type: "input",
+            message: "What is the new employee's name?",
+            name: "name",
+        },
+        {
+            type: "input",
+            message: "What is the new employee's ID number",
+            name: "id",
+        },
+        {
+            type: "input",
+            message: "What is the employee's email address?",
+            name: "email",
+        },
+        {
+            type: "confirm",
+            message: "Do you want to add a new employee?",
+            name: "addNew",
+        },
+        // for managers
+        {
+            type: "input",
+            message: "What is the manager's office number?",
+            name: "officeNumber",
+        },
+        // for engineers
+        {
+            type: "input",
+            message: "What is the engineer's github username?",
+            name: "github",
+        },
+        // for interns
+        {
+            type: "input",
+            message: "Which college or university did the intern attend?",
+            name: "school",
+        },
+
+    ];
+};
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 
-// array of questions for user
-// add function to select certain questions for the user to answer
-const questions = [
-    {
-        type: "list",
-        message: "Which type of team member would you like to add?",
-        name: "role",
-        choices: ["Manager", "Engineer", "Intern"]
-    },
-    {
-        type: "input",
-        message: "What is the new team members's name?",
-        name: "name",
-    },
-    {
-        type: "input",
-        message: "What is the new team members's ID number",
-        name: "id",
-    },
-    {
-        type: "input",
-        message: "What is the team member's email address?",
-        name: "email",
-    },
-    // for managers
-    {
-        type: "input",
-        message: "What is the manager's office number?",
-        name: "office",
-    },
-    // for engineers
-    {
-        type: "input",
-        message: "What is the engineer's github username?",
-        name: "username",
-    },
-    // for interns
-    {
-        type: "input",
-        message: "Which college or university did the intern attend?",
-        name: "uni",
-    },
 
-];
+
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
