@@ -12,7 +12,7 @@
   7. [Questions](#questions)
   
 
-  ![image](Asset/HTMLGenerator.png)
+  ![image](Asset/TeamProfiles.png)
   ## Project Description
   If you're looking for a way to create an HTML page of your employees/team members using nothing but your command line, look no further!  Here is a Team Member Webpage Generator that will handle all the hard work for you.  Simply answer the questions in the integrated terminal and the webpage will generate once you're done.
   
@@ -59,7 +59,8 @@
   
   #### Questions (FAQs)
   * Q: Do I need to install anything? A: Yes, install Inquirer.
-  * Q: Once I answer the questions, what do I need to do? A: Nothing, the webpage will autopopulate Bootstrap cards of your team members and their respective information.  
+  * Q: Once I answer the questions, what do I need to do? A: Nothing, the webpage will autopopulate Bootstrap cards of your team members and their respective information. 
+  * Q: I keep seeing a wild comma on my page.  What do I do?  A: Look for random commas in the generated html code in between divs and delete them.
 
 
   ###### Contact Me
