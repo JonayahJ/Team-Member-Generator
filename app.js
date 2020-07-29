@@ -5,15 +5,16 @@ const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
 
+// util - allows you to use write file, asynchronously. 
+const util = require("util")
+const writeFileAsync = util.promisify(fs.writeFile);
+
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
-// const writeFileAsync = util.promisify(fs.writefile);
 const render = require("./lib/htmlRenderer");
 const Employee = require("./lib/Employee");
 
-// util - allows you to use write file, asynchronously. 
-// const util = require("util")
 
 const teamMembers = [];
 
@@ -150,7 +151,8 @@ function newTeamMember() {
 
 promptQuestions();
 
-// function pushToHTML(){
-
-// };
+function pushToHTML(){
+    const generateHTML = render(teamMembers);
+    writeFileAsync(outputPath, generateHTML);
+};
 
